@@ -129,7 +129,21 @@ local CLUSTER_SUBSCRIBE_LIST_NO_BATTERY = {
   WindowCovering.server.attributes.OperationalStatus,
 }
 
+local function set_preset(device)
+  test.socket.capability:__expect_send(
+    device:generate_test_message(
+      "main", capabilities.windowShadePreset.supportedCommands({"presetPosition", "setPresetPosition"}, {visibility = {displayed = false}})
+    )
+  )
+  test.socket.capability:__expect_send(
+    device:generate_test_message(
+      "main", capabilities.windowShadePreset.position(30, {visibility = {displayed = false}})
+    )
+  )
+end
+
 local function test_init()
+  set_preset(mock_device)
   local subscribe_request = CLUSTER_SUBSCRIBE_LIST[1]:subscribe(mock_device)
   for i, clus in ipairs(CLUSTER_SUBSCRIBE_LIST) do
     if i > 1 then subscribe_request:merge(clus:subscribe(mock_device)) end
@@ -139,6 +153,7 @@ local function test_init()
 end
 
 local function test_init_switch_to_battery()
+  set_preset(mock_device_switch_to_battery)
   local subscribe_request = CLUSTER_SUBSCRIBE_LIST_NO_BATTERY[1]:subscribe(mock_device_switch_to_battery)
   for i, clus in ipairs(CLUSTER_SUBSCRIBE_LIST_NO_BATTERY) do
     if i > 1 then subscribe_request:merge(clus:subscribe(mock_device_switch_to_battery)) end
@@ -152,6 +167,7 @@ local function test_init_switch_to_battery()
 end
 
 local function test_init_mains_powered()
+  set_preset(mock_device_mains_powered)
   local subscribe_request = CLUSTER_SUBSCRIBE_LIST_NO_BATTERY[1]:subscribe(mock_device_mains_powered)
   for i, clus in ipairs(CLUSTER_SUBSCRIBE_LIST_NO_BATTERY) do
     if i > 1 then subscribe_request:merge(clus:subscribe(mock_device_mains_powered)) end
@@ -684,6 +700,11 @@ test.register_coroutine_test(
         },
       }
     )
+    test.socket.capability:__expect_send(
+      mock_device:generate_test_message(
+        "main", capabilities.windowShadePreset.supportedCommands({"presetPosition", "setPresetPosition"}, {visibility = {displayed = false}})
+      )
+    )
     test.wait_for_events()
 
     test.socket.capability:__queue_receive(
@@ -774,7 +795,7 @@ test.register_coroutine_test("OperationalStatus report contains current position
   )
 end)
 
-test.register_coroutine_test("Handle windowcoveringPreset", function()
+test.register_coroutine_test("Handle presetPosition command", function()
   test.socket.capability:__queue_receive(
     {
       mock_device.id,
