@@ -700,11 +700,6 @@ test.register_coroutine_test(
         },
       }
     )
-    test.socket.capability:__expect_send(
-      mock_device:generate_test_message(
-        "main", capabilities.windowShadePreset.supportedCommands({"presetPosition", "setPresetPosition"}, {visibility = {displayed = false}})
-      )
-    )
     test.wait_for_events()
 
     test.socket.capability:__queue_receive(

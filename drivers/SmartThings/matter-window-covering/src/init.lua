@@ -128,12 +128,9 @@ local function info_changed(driver, device, event, args)
 end
 
 local function device_added(driver, device)
-  device:emit_event(capabilities.windowShade.supportedWindowShadeCommands({"open", "close", "pause"}, {visibility = {displayed = false}}))
-  device:emit_event(capabilities.windowShadePreset.supportedCommands({"presetPosition", "setPresetPosition"}, {visibility = {displayed = false}}))
-  if device:supports_capability_by_id(capabilities.windowShadePreset.ID) and
-    device:get_latest_state("main", capabilities.windowShadePreset.ID, capabilities.windowShadePreset.position.NAME) == nil then
-    device:emit_event(capabilities.windowShadePreset.position(PRESET_LEVEL, {visibility = {displayed = false}}))
-  end
+  device:emit_event(
+    capabilities.windowShade.supportedWindowShadeCommands({"open", "close", "pause"}, {visibility = {displayed = false}})
+  )
   device:set_field(REVERSE_POLARITY, false, { persist = true })
 end
 
