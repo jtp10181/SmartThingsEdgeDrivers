@@ -148,6 +148,7 @@ local function handle_preset(driver, device, cmd)
     local lift_value = device:get_latest_state(
       "main", capabilities.windowShadePreset.ID, capabilities.windowShadePreset.position.NAME
     ) or PRESET_LEVEL
+    lift_value = reverse_polarity_if_needed(device, lift_value)
     local hundredths_lift_percent = lift_value * 100
     local req = clusters.WindowCovering.server.commands.GoToLiftPercentage(
       device, endpoint_id, hundredths_lift_percent
