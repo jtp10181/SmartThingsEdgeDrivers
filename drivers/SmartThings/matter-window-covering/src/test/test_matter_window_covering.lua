@@ -23,7 +23,6 @@ local mock_device = test.mock_device.build_test_matter_device(
   {
     profile = t_utils.get_profile_definition("window-covering-tilt-battery.yml"),
     manufacturer_info = {vendor_id = 0x0000, product_id = 0x0000},
-    preferences = { presetPosition = 30 },
     endpoints = {
       {
         endpoint_id = 2,
@@ -55,7 +54,6 @@ local mock_device_switch_to_battery = test.mock_device.build_test_matter_device(
   {
     profile = t_utils.get_profile_definition("window-covering.yml"),
     manufacturer_info = {vendor_id = 0x0000, product_id = 0x0000},
-    preferences = { presetPosition = 30 },
     endpoints = {
       {
         endpoint_id = 2,
@@ -87,7 +85,6 @@ local mock_device_mains_powered = test.mock_device.build_test_matter_device(
   {
     profile = t_utils.get_profile_definition("window-covering.yml"),
     manufacturer_info = {vendor_id = 0x0000, product_id = 0x0000},
-    preferences = { presetPosition = 30 },
     endpoints = {
       {
         endpoint_id = 2,
@@ -137,7 +134,7 @@ local function set_preset(device)
   )
   test.socket.capability:__expect_send(
     device:generate_test_message(
-      "main", capabilities.windowShadePreset.position(30, {visibility = {displayed = false}})
+      "main", capabilities.windowShadePreset.position(50, {visibility = {displayed = false}})
     )
   )
 end
@@ -790,20 +787,31 @@ test.register_coroutine_test("OperationalStatus report contains current position
   )
 end)
 
-test.register_coroutine_test("Handle presetPosition command", function()
-  test.socket.capability:__queue_receive(
-    {
+test.register_coroutine_test(
+  "Handle preset commands",
+  function()
+    local PRESET_LEVEL = 30
+    test.socket.capability:__queue_receive({
+      mock_device.id,
+      {capability = "windowShadePreset", component = "main", command = "setPresetPosition", args = { PRESET_LEVEL }},
+    })
+    test.socket.capability:__expect_send(
+      mock_device:generate_test_message(
+        "main", capabilities.windowShadePreset.position(PRESET_LEVEL)
+      )
+    )
+    test.socket.capability:__queue_receive({
       mock_device.id,
       {capability = "windowShadePreset", component = "main", command = "presetPosition", args = {}},
-    }
-  )
-  test.socket.matter:__expect_send(
-    {mock_device.id, WindowCovering.server.commands.GoToLiftPercentage(mock_device, 10, 7000)}
-  )
-  test.socket.matter:__expect_send(
-    {mock_device.id, WindowCovering.server.commands.GoToTiltPercentage(mock_device, 10, 5000)}
-  )
-end)
+    })
+    test.socket.matter:__expect_send(
+      {mock_device.id, WindowCovering.server.commands.GoToLiftPercentage(mock_device, 10, (100 - PRESET_LEVEL) * 100)}
+    )
+    test.socket.matter:__expect_send(
+      {mock_device.id, WindowCovering.server.commands.GoToTiltPercentage(mock_device, 10, 5000)}
+    )
+  end
+)
 
 test.register_coroutine_test(
   "Test profile change to window-covering-battery when battery percent remaining attribute (attribute ID 12) is available",
