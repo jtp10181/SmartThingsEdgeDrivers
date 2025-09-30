@@ -1,0 +1,6 @@
+name: 'Zooz Remote Button/Switch'
+packageKey: 'zooz-remote-button'
+permissions:
+  zwave: { }
+description: 'Supports: ZEN34, ZEN37'
+vendorSupportInformation: 'https://www.support.getzooz.com/home/'

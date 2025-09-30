@@ -1,0 +1,234 @@
+name: zooz-zen37-wall-remote
+components:
+  - id: main
+    capabilities:
+      - id: battery
+        version: 1
+      - id: refresh
+        version: 1
+      - id: firmwareUpdate
+        version: 1
+    categories:
+      - name: RemoteController
+  - id: button1
+    capabilities:
+      - id: button
+        version: 1
+    label: Button 1
+    categories:
+      - name: RemoteController
+  - id: button2
+    capabilities:
+      - id: button
+        version: 1
+    label: Button 2
+    categories:
+      - name: RemoteController
+  - id: button3
+    capabilities:
+      - id: button
+        version: 1
+    label: Button 3
+    categories:
+      - name: RemoteController
+  - id: button4
+    capabilities:
+      - id: button
+        version: 1
+    label: Button 4
+    categories:
+      - name: RemoteController
+#metadata:
+#  vid: 85aebf99-579d-3732-8bb4-80ce2d71ed57
+#  mnmn: SmartThingsCommunity
+#  ocfDeviceType: x.com.st.d.remotecontroller
+preferences:
+  - name: "lowBatteryAlarmReport"
+    title: "Low Battery Alarm Report"
+    description: "Default: 5%"
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        5: "5%"
+        6: "6%"
+        7: "7%"
+        8: "8%"
+        9: "9%"
+        10: "10%"
+      default: 5
+  - name: "ledIndicatorColor1"
+    title: "Button 1 LED Indicator Color"
+    description: "Default: White"
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0: "White"
+        1: "Purple"
+        2: "Orange"
+        3: "Cyan"
+        4: "Red"
+        5: "Green"
+        6: "Blue"
+      default: 0
+  - name: "ledIndicatorColor2"
+    title: "Button 2 LED Indicator Color"
+    description: "Default: Purple"
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0: "White"
+        1: "Purple"
+        2: "Orange"
+        3: "Cyan"
+        4: "Red"
+        5: "Green"
+        6: "Blue"
+      default: 1
+  - name: "ledIndicatorColor3"
+    title: "Button 3 LED Indicator Color"
+    description: "Default: Orange"
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0: "White"
+        1: "Purple"
+        2: "Orange"
+        3: "Cyan"
+        4: "Red"
+        5: "Green"
+        6: "Blue"
+      default: 2
+  - name: "ledIndicatorColor4"
+    title: "Button 4 LED Indicator Color"
+    description: "Default: Cyan"
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0: "White"
+        1: "Purple"
+        2: "Orange"
+        3: "Cyan"
+        4: "Red"
+        5: "Green"
+        6: "Blue"
+      default: 3
+  - name: "ledIndicatorBrightness"
+    title: "LED Indicator Brightness"
+    description: "Default: 5% Brightness"
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0: "LED Off"
+        1: "10% Brightness"
+        2: "20% Brightness"
+        3: "30% Brightness"
+        4: "40% Brightness"
+        5: "50% Brightness"
+        6: "60% Brightness"
+        7: "70% Brightness"
+        8: "80% Brightness"
+        9: "90% Brightness"
+        10: "100% Brightness"
+      default: 5
+  - name: "multilevelDuration"
+    title: "Duration for Start/Stop Multilevel"
+    description: "Default: 5, Range: 1..99 (seconds)"
+    required: false
+    preferenceType: integer
+    definition:
+      minimum: 1
+      maximum: 99
+      default: 5
+  - name: "associationGroupTwo"
+    title: "Group 2 Associations"
+    description: "Enter Device Network ID(s) separated by commas (5 max)"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      minLength: 0
+      maxLength: 50
+      default: ""
+  - name: "associationGroupThree"
+    title: "Group 3 Associations"
+    description: "Enter Device Network ID(s) separated by commas (5 max)"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      minLength: 0
+      maxLength: 50
+      default: ""
+  - name: "associationGroupFour"
+    title: "Group 4 Associations"
+    description: "Enter Device Network ID(s) separated by commas (5 max)"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      minLength: 0
+      maxLength: 50
+      default: ""
+  - name: "associationGroupFive"
+    title: "Group 5 Associations"
+    description: "Enter Device Network ID(s) separated by commas (5 max)"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      minLength: 0
+      maxLength: 50
+      default: ""
+  - name: "associationGroupSix"
+    title: "Group 6 Associations"
+    description: "Enter Device Network ID(s) separated by commas (5 max)"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      minLength: 0
+      maxLength: 50
+      default: ""
+  - name: "associationGroupSeven"
+    title: "Group 7 Associations"
+    description: "Enter Device Network ID(s) separated by commas (5 max)"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      minLength: 0
+      maxLength: 50
+      default: ""
+  - name: "associationGroupEight"
+    title: "Group 8 Associations"
+    description: "Enter Device Network ID(s) separated by commas (5 max)"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      minLength: 0
+      maxLength: 50
+      default: ""
+  - name: "associationGroupNine"
+    title: "Group 9 Associations"
+    description: "Enter Device Network ID(s) separated by commas (5 max)"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      minLength: 0
+      maxLength: 50
+      default: ""
+  - name: "profileName"
+    title: "Profile"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: paragraph
+      default: "Zooz-ZEN37-Wall-Remote"

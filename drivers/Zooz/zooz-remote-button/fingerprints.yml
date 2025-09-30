@@ -1,0 +1,19 @@
+zwaveManufacturer:
+  - id: "Zooz/ZEN34"
+    deviceLabel: Zooz ZEN34 Remote Switch
+    manufacturerId: 0x027A
+    productType: 0x7000
+    productId: 0xF001
+    deviceProfileName: zooz-zen34-remote-switch
+  - id: "Zooz/ZEN34v1"
+    deviceLabel: Zooz ZEN34 Remote Switch
+    manufacturerId: 0x027A
+    productType: 0x0004
+    productId: 0xF001
+    deviceProfileName: zooz-zen34-remote-switch
+  - id: "Zooz/ZEN37"
+    deviceLabel: Zooz ZEN37 Wall Remote
+    manufacturerId: 0x027A
+    productType: 0x7000
+    productId: 0xF003
+    deviceProfileName: zooz-zen37-wall-remote

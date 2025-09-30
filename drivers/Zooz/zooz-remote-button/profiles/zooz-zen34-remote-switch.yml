@@ -1,0 +1,88 @@
+name: zooz-zen34-remote-switch
+components:
+  - id: main
+    capabilities:
+      - id: button
+        version: 1
+      - id: battery
+        version: 1
+      - id: refresh
+        version: 1
+      - id: firmwareUpdate
+        version: 1
+    categories:
+      - name: RemoteController
+#metadata:
+#  vid: 4599f4b6-27c8-3d52-af5a-3b105bf698e1
+#  mnmn: SmartThingsCommunity
+#  ocfDeviceType: x.com.st.d.remotecontroller
+preferences:
+  - name: "ledMode"
+    title: "LED Indicator Mode"
+    description: "LED Indicator Mode"
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0: "Always off"
+        1: "On when pressed [DEFAULT]"
+        2: "Always on (upper paddle color)"
+        3: "Always on (lower paddle color)"
+      default: 1
+  - name: "upperPaddleLedColor"
+    title: "Upper Paddled LED Indicator Color"
+    description: "Upper Paddled LED Indicator Color"
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0: "White"
+        1: "Blue [DEFAULT]"
+        2: "Green"
+        3: "Red"
+        4: "Magenta"
+        5: "Yellow"
+        6: "Cyan"
+      default: 1
+  - name: "lowerPaddleLedColor"
+    title: "Lower Paddle LED Indicator Color"
+    description: "Lower Paddle LED Indicator Color"
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0: "White [DEFAULT]"
+        1: "Blue"
+        2: "Green"
+        3: "Red"
+        4: "Magenta"
+        5: "Yellow"
+        6: "Cyan"
+      default: 0
+  - name: "associationGroupTwo"
+    title: "Group 2 Associations (on/off)"
+    description: "Enter Device Network ID(s) separated by commas (5 max)"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      minLength: 0
+      maxLength: 20
+      default: ""
+  - name: "associationGroupThree"
+    title: "Group 3 Associations (dimming)"
+    description: "Enter Device Network ID(s) separated by commas (5 max)"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      minLength: 0
+      maxLength: 20
+      default: ""
+  - name: "profileName"
+    title: "Profile"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: paragraph
+      default: "Zooz-ZEN34-Remote-Switch"
